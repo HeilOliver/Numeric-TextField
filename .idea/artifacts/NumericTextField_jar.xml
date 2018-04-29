@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="NumericTextField:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/NumericTextField_jar</output-path>
+    <root id="archive" name="Numeric-TextField.jar">
+      <element id="module-output" name="Numeric-TextField" />
+    </root>
+  </artifact>
+</component>
