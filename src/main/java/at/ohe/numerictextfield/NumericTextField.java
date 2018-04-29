@@ -81,7 +81,7 @@ public class NumericTextField extends TextField {
 
     private String createCheckString(String s) {
         if (s == null || s.isEmpty()) return "0";
-        if (s.length() == 1 && s.startsWith("-")) return "0";
+        if (s.length() == 1 && (s.startsWith("-") || s.startsWith("."))) return "0";
         return s;
     }
 
