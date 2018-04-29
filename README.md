@@ -6,6 +6,9 @@ It also has a object property for the datatype `Number`.
 This property reflects the input. This means that if, for example, ten is typed, the `Number` property is 
 changed to 10 immediately afterwards. If the entry is incorrect, the text field is automatically reset to its last state. 
 
+## Give it to me!
+[Download Jar Here](https://github.com/HeilOliver/Numeric-TextField/raw/master/jar/numeric-textfield-1.0.0.jar)
+
 ## How can I use it?
 
 There are two different ways to use it.
