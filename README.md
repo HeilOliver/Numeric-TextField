@@ -1,37 +1,104 @@
-## Welcome to GitHub Pages
+# Numeric-TextField
+## What is it?
 
-You can use the [editor on GitHub](https://github.com/HeilOliver/Numeric-TextField/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+The text field is a common JavaFx text field which only allows numbers. 
+It also has a object property for the datatype `Number`. 
+This property reflects the input. This means that if, for example, ten is typed, the `Number` property is 
+changed to 10 immediately afterwards. If the entry is incorrect, the text field is automatically reset to its last state. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## How can I use it?
 
-### Markdown
+There are two different ways to use it.
+``` FXML 
+<GridPane fx:controller="sample.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center">
+          
+    <!-- This NumericTextField converts the input
+         into an integer and limits the values from -10 to 10. -->
+    <NumericTextField type="INTEGER" maxValue="10" minValue="-10"/>
+    
+</GridPane>
+```
+``` Code Behind 
+void foo() {
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+// This NumericTextField converts the input
+// into an integer and limits the values from -10 to 10.
+  NumericTextField textField = 
+    new NumericTextField(-10,10,NumericTextField.NumericType.INTEGER);
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## You want to validate yourself?
+First we need our own validator. Therefore we implement the `INumberValidator` interface.
+```
+new INumberValidator() {
+    @Override
+    public boolean isValid(String s, double maxValue, double minValue) {
+       // some Magic here to validate the given string "s"
+        return true;
+    }
 
-### Jekyll Themes
+    @Override
+    public Number getNumber(String s) throws NumberFormatException {
+       // here also some magic to parse the string s to an number
+       return null;
+    }
+}
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/HeilOliver/Numeric-TextField/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+There are two different ways to use your own validator.
+``` 
+NumericTextField textField;
 
-### Support or Contact
+void foo_UseTheConstructor() {
+   textField = new NumericTextField(-10,10,yourMagicValidator);
+}
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+void foo_UseTheSetMethod() {
+   textField.setCurrValidator(yourMagicValidator);
+}
+```
+
+## Bring me to the fancy stuff!!
+Sorry, at the moment there is nothing fancy or special in there :(
+But you get a little example:
+``` 
+- FXML -
+<?import at.ohe.numerictextfield.NumericTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<VBox fx:controller="sample.Controller"
+      xmlns:fx="http://javafx.com/fxml" alignment="center" >
+    <NumericTextField fx:id="inpNumber" type="DOUBLE" maxValue="10" minValue="-10"/>
+    <Label fx:id="lblNumber"/>
+</VBox>
+
+- Controller - 
+import at.ohe.numerictextfield.NumericTextField;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+
+public class Controller {
+
+    @FXML
+    private NumericTextField inpNumber;
+    @FXML
+    private Label lblNumber;
+
+    public void initialize() {
+        inpNumber.numberProperty().addListener(((observable, oldValue, newValue) -> {
+            lblNumber.setText(newValue.toString());
+        }));
+    }
+}
+``` 
+What's going to happen? 
+If something is entered in the input field, 
+the label displays the corresponding value. 
+If something is entered that cannot be processed, 
+the label retains its value.
+
+
+
