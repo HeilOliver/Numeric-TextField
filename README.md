@@ -7,7 +7,7 @@ This property reflects the input. This means that if, for example, ten is typed,
 changed to 10 immediately afterwards. If the entry is incorrect, the text field is automatically reset to its last state. 
 
 ## Give it to me!
-[Download Jar Here](https://github.com/HeilOliver/Numeric-TextField/raw/master/jar/numeric-textfield-1.0.0.jar)
+[Download Jar Here](https://github.com/HeilOliver/Numeric-TextField/releases/download/v1.0.0/numeric-textfield-1.0.0.jar)
 
 ## How can I use it?
 
